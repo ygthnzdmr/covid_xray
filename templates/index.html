@@ -4,357 +4,355 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>COVID Röntgen Tespit Sistemi</title>
-
   <style>
     :root{
-      --bg:#d9d9d9;
-      --bg-2:#cfcfcf;
-      --card:#1f1f1f;
-      --card-2:#2a2a2a;
-      --card-3:#343434;
+      --bg:#d8d8d8;
+      --bg2:#cfcfcf;
+      --dark:#171717;
+      --dark2:#212121;
+      --dark3:#2a2a2a;
+      --line:rgba(255,255,255,.08);
       --text:#f5f5f5;
-      --muted:#c9c9c9;
-      --line:rgba(255,255,255,.10);
-      --soft-line:rgba(255,255,255,.06);
+      --muted:#d0d0d0;
+      --muted2:#b5b5b5;
       --red:#c1121f;
-      --red-hover:#a30f1a;
-      --green:#38b000;
-      --danger:#ef4444;
-      --shadow:0 18px 50px rgba(0,0,0,.22);
+      --red2:#9f0f19;
+      --green:#2d6a4f;
+      --shadow:0 16px 45px rgba(0,0,0,.18);
       --radius:24px;
     }
 
     *{
-      box-sizing:border-box;
       margin:0;
       padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
     }
 
     body{
-      font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+      font-family:Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,.35), transparent 20%),
+        radial-gradient(circle at bottom right, rgba(255,255,255,.18), transparent 18%),
+        linear-gradient(135deg, var(--bg), var(--bg2));
       color:var(--text);
       min-height:100vh;
-      background:
-        radial-gradient(circle at top left, rgba(255,255,255,.35), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(255,255,255,.18), transparent 20%),
-        linear-gradient(135deg, var(--bg), var(--bg-2));
-      padding:32px 18px 60px;
     }
 
     .container{
       width:100%;
       max-width:1200px;
       margin:0 auto;
+      padding:24px 16px 48px;
     }
 
-    .hero{
-      position:relative;
-      overflow:hidden;
-      background:linear-gradient(135deg, #232323, #161616);
+    .navbar{
+      position:sticky;
+      top:12px;
+      z-index:50;
+      margin-bottom:22px;
+      background:rgba(20,20,20,.85);
+      backdrop-filter:blur(12px);
       border:1px solid var(--line);
-      border-radius:32px;
-      padding:38px 34px;
+      border-radius:20px;
       box-shadow:var(--shadow);
-      margin-bottom:26px;
-    }
-
-    .hero::before{
-      content:"";
-      position:absolute;
-      inset:-80px auto auto -80px;
-      width:240px;
-      height:240px;
-      background:radial-gradient(circle, rgba(255,255,255,.12), transparent 70%);
-      pointer-events:none;
-    }
-
-    .hero::after{
-      content:"";
-      position:absolute;
-      right:-60px;
-      bottom:-60px;
-      width:220px;
-      height:220px;
-      background:radial-gradient(circle, rgba(193,18,31,.22), transparent 70%);
-      pointer-events:none;
-    }
-
-    .hero-top{
+      padding:14px 18px;
       display:flex;
+      align-items:center;
       justify-content:space-between;
-      align-items:flex-start;
-      gap:20px;
+      gap:18px;
       flex-wrap:wrap;
     }
 
-    .brand{
-      display:inline-flex;
+    .logo{
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:.3px;
+      color:#fff;
+      display:flex;
       align-items:center;
       gap:10px;
-      margin-bottom:14px;
-      padding:9px 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.05);
-      border:1px solid var(--soft-line);
-      font-size:14px;
-      color:#e8e8e8;
-      backdrop-filter:blur(6px);
     }
 
-    .brand-dot{
-      width:10px;
-      height:10px;
+    .logo-dot{
+      width:11px;
+      height:11px;
       border-radius:50%;
       background:var(--red);
       box-shadow:0 0 14px rgba(193,18,31,.8);
     }
 
-    h1{
-      font-size:40px;
-      line-height:1.1;
-      font-weight:800;
-      letter-spacing:.3px;
-      margin-bottom:12px;
+    .nav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
     }
 
-    .hero p{
-      max-width:760px;
-      color:var(--muted);
-      font-size:16px;
-      line-height:1.7;
+    .nav-links a{
+      text-decoration:none;
+      color:#f1f1f1;
+      font-size:14px;
+      font-weight:700;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      transition:.2s ease;
+    }
+
+    .nav-links a:hover{
+      background:rgba(193,18,31,.18);
+      border-color:rgba(193,18,31,.35);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(135deg, #1e1e1e, #141414);
+      border:1px solid var(--line);
+      border-radius:32px;
+      padding:42px 34px;
+      box-shadow:var(--shadow);
+      margin-bottom:24px;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      width:260px;
+      height:260px;
+      left:-80px;
+      top:-80px;
+      background:radial-gradient(circle, rgba(255,255,255,.10), transparent 70%);
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      width:240px;
+      height:240px;
+      right:-70px;
+      bottom:-70px;
+      background:radial-gradient(circle, rgba(193,18,31,.20), transparent 70%);
+    }
+
+    .hero-grid{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:1.3fr .7fr;
+      gap:24px;
+      align-items:center;
     }
 
     .hero-badge{
-      background:linear-gradient(135deg, rgba(193,18,31,.20), rgba(255,255,255,.06));
-      border:1px solid rgba(255,255,255,.10);
-      padding:14px 18px;
-      border-radius:18px;
-      min-width:220px;
-      text-align:center;
-      box-shadow:0 10px 25px rgba(0,0,0,.18);
-    }
-
-    .hero-badge .small{
-      display:block;
-      color:#d7d7d7;
-      font-size:13px;
-      margin-bottom:5px;
-    }
-
-    .hero-badge .big{
-      font-size:26px;
-      font-weight:800;
-      color:white;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:24px;
-    }
-
-    .card{
-      background:linear-gradient(180deg, rgba(31,31,31,.98), rgba(24,24,24,.98));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:26px;
-    }
-
-    .card-title{
-      display:flex;
+      display:inline-flex;
       align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      margin-bottom:10px;
+      gap:10px;
+      padding:10px 16px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:#f0f0f0;
+      font-size:14px;
+      font-weight:700;
+      margin-bottom:16px;
     }
 
-    .card h2{
-      font-size:24px;
+    h1{
+      font-size:44px;
+      line-height:1.08;
+      margin-bottom:14px;
+      font-weight:900;
+    }
+
+    .hero p{
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.7;
+      max-width:760px;
+    }
+
+    .hero-actions{
+      margin-top:22px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      border:none;
+      border-radius:16px;
+      padding:14px 20px;
       font-weight:800;
+      font-size:15px;
+      cursor:pointer;
+      transition:.22s ease;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--red), var(--red2));
+      color:white;
+      box-shadow:0 10px 24px rgba(193,18,31,.30);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-2px);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,.05);
+      color:white;
+      border:1px solid rgba(255,255,255,.10);
+    }
+
+    .hero-side{
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:24px;
+      padding:22px;
+    }
+
+    .metric{
+      padding:14px 0;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+
+    .metric:last-child{
+      border-bottom:none;
+    }
+
+    .metric .label{
+      color:#cfcfcf;
+      font-size:13px;
+      margin-bottom:6px;
+    }
+
+    .metric .value{
+      font-size:28px;
+      font-weight:900;
       color:#fff;
     }
 
-    .card p{
-      color:var(--muted);
+    .section{
+      background:linear-gradient(180deg, rgba(26,26,26,.98), rgba(20,20,20,.98));
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:28px;
+      box-shadow:var(--shadow);
+      margin-bottom:22px;
+    }
+
+    .section-title{
+      font-size:30px;
+      font-weight:900;
+      margin-bottom:10px;
+    }
+
+    .section-sub{
+      color:var(--muted2);
+      line-height:1.7;
+      margin-bottom:22px;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .info-card{
+      background:linear-gradient(180deg, #2a2a2a, #232323);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:22px;
+      padding:20px;
+    }
+
+    .info-card h3{
+      font-size:19px;
+      margin-bottom:10px;
+    }
+
+    .info-card p,
+    .info-card li{
+      color:#d7d7d7;
       line-height:1.7;
       font-size:15px;
     }
 
-    .upload-box{
-      margin-top:22px;
-      border:1px dashed rgba(255,255,255,.16);
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
-      border-radius:22px;
-      padding:22px;
-      transition:.25s ease;
+    .info-card ul{
+      padding-left:18px;
+      margin-top:8px;
     }
 
-    .upload-box:hover{
-      border-color:rgba(255,255,255,.28);
-      transform:translateY(-1px);
-    }
-
-    .upload-label{
-      display:block;
-      font-size:14px;
-      color:#e4e4e4;
-      margin-bottom:10px;
-      font-weight:600;
-    }
-
-    input[type=file]{
-      width:100%;
-      padding:15px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      background:#2b2b2b;
-      color:white;
-      margin-bottom:16px;
-      outline:none;
-    }
-
-    input[type=file]::file-selector-button{
-      background:#3a3a3a;
-      color:white;
-      border:none;
-      padding:10px 14px;
-      border-radius:10px;
-      margin-right:12px;
-      cursor:pointer;
-    }
-
-    .btn{
-      width:100%;
-      border:none;
-      border-radius:16px;
-      padding:15px 18px;
-      background:linear-gradient(135deg, var(--red), #8f0d17);
-      color:#fff;
-      font-size:16px;
-      font-weight:800;
-      cursor:pointer;
-      transition:.22s ease;
-      box-shadow:0 10px 24px rgba(193,18,31,.28);
-      letter-spacing:.2px;
-    }
-
-    .btn:hover{
-      transform:translateY(-2px);
-      background:linear-gradient(135deg, #d11827, var(--red-hover));
-      box-shadow:0 14px 28px rgba(193,18,31,.35);
-    }
-
-    .hint{
-      margin-top:12px;
-      font-size:13px;
-      color:#b9b9b9;
-      line-height:1.6;
-    }
-
-    .error{
-      margin-top:18px;
-      padding:16px 18px;
-      border-radius:16px;
-      border:1px solid rgba(239,68,68,.35);
-      background:rgba(239,68,68,.10);
-      color:#ffd1d1;
-      font-size:14px;
-    }
-
-    .result{
-      margin-top:20px;
-      padding:22px;
-      border-radius:22px;
-      background:linear-gradient(180deg, #2d2d2d, #242424);
-      border:1px solid rgba(255,255,255,.10);
-    }
-
-    .result-header{
+    .dataset-badges{
       display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
       flex-wrap:wrap;
-      margin-bottom:14px;
+      gap:10px;
+      margin-top:12px;
     }
 
-    .result-header h3{
-      font-size:22px;
-      font-weight:800;
-    }
-
-    .pill{
+    .badge{
       display:inline-flex;
       align-items:center;
       gap:8px;
-      padding:8px 14px;
+      padding:10px 14px;
       border-radius:999px;
-      font-size:13px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      color:#f2f2f2;
+      font-size:14px;
       font-weight:700;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      color:#f3f3f3;
     }
 
-    .meta-list{
+    .examples{
       display:grid;
-      gap:12px;
-      margin-top:10px;
-    }
-
-    .meta-item{
-      padding:14px 16px;
-      border-radius:16px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-      color:#ececec;
-      font-size:15px;
-    }
-
-    .prediction{
+      grid-template-columns:1fr 1fr;
+      gap:18px;
       margin-top:18px;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:12px 16px;
-      border-radius:999px;
-      font-weight:800;
-      letter-spacing:.2px;
     }
 
-    .covid{
-      color:#fff;
-      background:linear-gradient(135deg, rgba(193,18,31,.95), rgba(143,13,23,.95));
-      box-shadow:0 8px 20px rgba(193,18,31,.24);
-    }
-
-    .normal{
-      color:#fff;
-      background:linear-gradient(135deg, #2d6a4f, #1b4332);
-      box-shadow:0 8px 20px rgba(56,176,0,.18);
-    }
-
-    .performance-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:18px;
-    }
-
-    .mini-badge{
-      padding:8px 13px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:700;
-      background:rgba(255,255,255,.06);
+    .example-card{
+      background:linear-gradient(180deg, #2a2a2a, #222);
       border:1px solid rgba(255,255,255,.08);
-      color:#ededed;
+      border-radius:22px;
+      overflow:hidden;
     }
 
-    .graphs{
+    .example-card img{
+      width:100%;
+      aspect-ratio:1/1;
+      object-fit:cover;
+      display:block;
+      background:#111;
+    }
+
+    .example-body{
+      padding:16px;
+    }
+
+    .example-body h4{
+      font-size:18px;
+      margin-bottom:8px;
+    }
+
+    .example-body p{
+      color:#d2d2d2;
+      line-height:1.65;
+      font-size:14px;
+    }
+
+    .performance-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:18px;
@@ -364,178 +362,520 @@
     .graph-box{
       background:linear-gradient(180deg, #2a2a2a, #232323);
       border:1px solid rgba(255,255,255,.08);
-      border-radius:20px;
+      border-radius:22px;
       padding:14px;
-      transition:.22s ease;
     }
 
-    .graph-box:hover{
-      transform:translateY(-2px);
-      border-color:rgba(255,255,255,.16);
-    }
-
-    .graph-title{
-      font-size:15px;
-      font-weight:700;
-      color:#f1f1f1;
+    .graph-box h4{
       margin-bottom:12px;
-      padding-left:2px;
+      font-size:17px;
     }
 
     .graph-box img{
       width:100%;
-      display:block;
       border-radius:14px;
       background:#fff;
+      display:block;
     }
 
-    .footer-note{
-      margin-top:24px;
+    .predict-wrap{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+      align-items:start;
+    }
+
+    .upload-box{
+      border:1px dashed rgba(255,255,255,.14);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+      border-radius:22px;
+      padding:22px;
+    }
+
+    .upload-box label{
+      display:block;
+      margin-bottom:10px;
+      font-size:14px;
+      font-weight:700;
+      color:#f0f0f0;
+    }
+
+    input[type=file]{
+      width:100%;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:#2c2c2c;
+      color:white;
+      margin-bottom:14px;
+    }
+
+    input[type=file]::file-selector-button{
+      background:#3b3b3b;
+      color:white;
+      border:none;
+      padding:10px 12px;
+      border-radius:10px;
+      margin-right:12px;
+      cursor:pointer;
+    }
+
+    .submit-btn{
+      width:100%;
+    }
+
+    .result{
+      margin-top:18px;
+      padding:20px;
+      border-radius:22px;
+      background:linear-gradient(180deg, #2d2d2d, #252525);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .result h3{
+      margin-bottom:12px;
+      font-size:22px;
+    }
+
+    .meta-item{
+      margin-bottom:10px;
+      color:#e8e8e8;
+      line-height:1.6;
+    }
+
+    .prediction{
+      display:inline-block;
+      margin-top:10px;
+      padding:12px 16px;
+      border-radius:999px;
+      font-weight:900;
+      letter-spacing:.2px;
+      color:#fff;
+    }
+
+    .covid{
+      background:linear-gradient(135deg, var(--red), var(--red2));
+    }
+
+    .normal{
+      background:linear-gradient(135deg, #2d6a4f, #1b4332);
+    }
+
+    .error{
+      margin-top:18px;
+      padding:14px 16px;
+      border-radius:16px;
+      background:rgba(193,18,31,.10);
+      border:1px solid rgba(193,18,31,.30);
+      color:#ffd5d8;
+    }
+
+    .table-like{
+      display:grid;
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns:220px 1fr;
+      gap:12px;
+      padding:14px 16px;
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+    }
+
+    .row strong{
+      color:#fff;
+    }
+
+    .row span{
+      color:#d7d7d7;
+      line-height:1.6;
+    }
+
+    .footer{
       text-align:center;
-      color:#4b4b4b;
+      color:#555;
+      padding-top:8px;
       font-size:13px;
-      font-weight:600;
+      font-weight:700;
     }
 
     @media (max-width: 980px){
-      .grid{
+      .hero-grid,
+      .grid-2,
+      .grid-3,
+      .examples,
+      .performance-grid,
+      .predict-wrap{
         grid-template-columns:1fr;
       }
     }
 
     @media (max-width: 700px){
-      body{
-        padding:18px 12px 40px;
-      }
-
-      .hero{
-        padding:28px 20px;
-        border-radius:24px;
-      }
-
-      h1{
-        font-size:30px;
-      }
-
-      .card{
-        padding:20px;
-        border-radius:20px;
-      }
-
-      .graphs{
-        grid-template-columns:1fr;
-      }
+      h1{font-size:32px;}
+      .section-title{font-size:25px;}
+      .row{grid-template-columns:1fr;}
+      .container{padding:16px 12px 36px;}
+      .hero, .section{padding:20px;}
+      .navbar{top:8px;}
     }
   </style>
 </head>
 <body>
   <div class="container">
 
-    <section class="hero">
-      <div class="hero-top">
+    <nav class="navbar">
+      <div class="logo">
+        <span class="logo-dot"></span>
+        COVID X-Ray AI
+      </div>
+      <div class="nav-links">
+        <a href="#anasayfa">Ana Sayfa</a>
+        <a href="#tahmin">Tahmin Yap</a>
+        <a href="#hakkinda">Hakkında</a>
+        <a href="#veriseti">Veri Seti</a>
+        <a href="#onisleme">Ön İşleme</a>
+        <a href="#model">Model</a>
+        <a href="#sonuclar">Sonuçlar</a>
+        <a href="#kaynakca">Kaynakça</a>
+      </div>
+    </nav>
+
+    <section class="hero" id="anasayfa">
+      <div class="hero-grid">
         <div>
-          <div class="brand">
-            <span class="brand-dot"></span>
-            Derin Öğrenme Destekli Analiz Sistemi
-          </div>
+          <div class="hero-badge">Derin Öğrenme Tabanlı Göğüs Röntgeni Analizi</div>
           <h1>COVID Röntgen Tespit Sistemi</h1>
           <p>
-            Bu sistem, eğitilmiş yapay sinir ağı modeli ile yüklenen göğüs röntgeni
-            görüntüsünü analiz eder ve sonucu <strong>COVID</strong> veya
-            <strong>NORMAL</strong> olarak tahmin eder. Ayrıca model performansına ait
-            temel değerlendirme grafikleri de aşağıda sunulmaktadır.
+            Bu proje, göğüs röntgeni görüntülerini kullanarak bireyin
+            <strong>COVID</strong> veya <strong>NORMAL</strong> sınıfında olup olmadığını
+            tahmin eden yapay zeka destekli bir web uygulamasıdır. Sistem, eğitim sürecinde
+            elde edilen performans grafikleriyle birlikte tahmin sonucunu kullanıcıya sunar.
           </p>
+
+          <div class="hero-actions">
+            <a href="#tahmin" class="btn btn-primary">Tahmin Ekranına Git</a>
+            <a href="#sonuclar" class="btn btn-secondary">Sonuçları İncele</a>
+          </div>
         </div>
 
-        <div class="hero-badge">
-          <span class="small">Model Durumu</span>
-          <span class="big">Hazır</span>
+        <div class="hero-side">
+          <div class="metric">
+            <div class="label">Problem Türü</div>
+            <div class="value">Binary Classification</div>
+          </div>
+          <div class="metric">
+            <div class="label">Sınıflar</div>
+            <div class="value">COVID / NORMAL</div>
+          </div>
+          <div class="metric">
+            <div class="label">Model Tipi</div>
+            <div class="value">ANN</div>
+          </div>
+          <div class="metric">
+            <div class="label">Giriş Boyutu</div>
+            <div class="value">64 × 64</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <div class="grid">
-      <section class="card">
-        <div class="card-title">
-          <h2>Görüntü Yükle</h2>
-          <span class="pill">Canlı Tahmin</span>
-        </div>
+    <section class="section" id="tahmin">
+      <div class="section-title">Tahmin Yap</div>
+      <div class="section-sub">
+        Analiz etmek istediğiniz röntgen görüntüsünü yükleyin. Sistem COVID olasılığını yüzde olarak hesaplayacaktır.
+      </div>
 
-        <p>
-          Analiz etmek istediğiniz akciğer röntgeni görüntüsünü sisteme yükleyin.
-          Sistem, görüntüyü işleyerek COVID olasılığını yüzdesel olarak sunacaktır.
-        </p>
+      <div class="predict-wrap">
+        <div class="upload-box">
+          <form method="post" enctype="multipart/form-data">
+            <label>Röntgen Görüntüsü Seçin</label>
+            <input type="file" name="image" accept=".png,.jpg,.jpeg,.bmp,.webp" required>
+            <button type="submit" class="btn btn-primary submit-btn">Tahmin Yap</button>
+          </form>
 
-        <form method="post" enctype="multipart/form-data" class="upload-box">
-          <label class="upload-label">Röntgen Görüntüsü Seçin</label>
-          <input type="file" name="image" accept=".png,.jpg,.jpeg,.bmp,.webp" required>
-          <button type="submit" class="btn">Tahmin Yap</button>
-          <div class="hint">
-            Desteklenen formatlar: PNG, JPG, JPEG, BMP, WEBP
-          </div>
-        </form>
+          {% if error %}
+            <div class="error">{{ error }}</div>
+          {% endif %}
 
-        {% if error %}
-          <div class="error">{{ error }}</div>
-        {% endif %}
-
-        {% if result %}
-          <div class="result">
-            <div class="result-header">
+          {% if result %}
+            <div class="result">
               <h3>Tahmin Sonucu</h3>
-              <span class="pill">Analiz Tamamlandı</span>
-            </div>
-
-            <div class="meta-list">
               <div class="meta-item"><strong>Dosya:</strong> {{ filename }}</div>
               <div class="meta-item"><strong>COVID Olasılığı:</strong> %{{ probability }}</div>
+
+              {% if result == "COVID" %}
+                <div class="prediction covid">🔴 Tahmin: COVID</div>
+              {% else %}
+                <div class="prediction normal">🟢 Tahmin: NORMAL</div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="info-card">
+          <h3>Tahmin Süreci</h3>
+          <ul>
+            <li>Kullanıcı röntgen görüntüsünü yükler.</li>
+            <li>Görüntü grayscale biçimde işlenir.</li>
+            <li>64x64 boyutuna yeniden ölçeklendirilir.</li>
+            <li>Piksel değerleri normalize edilir.</li>
+            <li>Model, COVID olasılığını hesaplar.</li>
+            <li>Sonuç COVID veya NORMAL olarak ekrana yansıtılır.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="hakkinda">
+      <div class="section-title">Proje Hakkında</div>
+      <div class="section-sub">
+        Bu bölümde projenin problem tanımı, amacı ve neden önemli olduğu açıklanmaktadır.
+      </div>
+
+      <div class="grid-3">
+        <div class="info-card">
+          <h3>Problem Tanımı</h3>
+          <p>
+            Bu çalışmada göğüs röntgeni görüntülerinden COVID-19 bulgularının
+            otomatik olarak tespit edilmesi ele alınmıştır. Problem, iki sınıflı
+            görüntü sınıflandırma problemi olarak değerlendirilmiştir.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3>Proje Amacı</h3>
+          <p>
+            Amaç, eğitilmiş bir yapay sinir ağı modeli ile yüklenen röntgen görüntüsünü
+            hızlı biçimde analiz ederek COVID ya da NORMAL sonucunu web ortamında sunmaktır.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3>Problemin Önemi</h3>
+          <p>
+            COVID-19 gibi bulaşıcı hastalıklarda hızlı ön değerlendirme, sağlık çalışanlarına
+            destek olabilecek karar destek sistemleri açısından önem taşımaktadır.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="veriseti">
+      <div class="section-title">Veri Seti</div>
+      <div class="section-sub">
+        Kullanılan veri seti Kaggle üzerinden elde edilen COVID-19 Radiography Dataset'tir.
+      </div>
+
+      <div class="grid-2">
+        <div class="info-card">
+          <h3>Veri Seti Özeti</h3>
+          <p>
+            Çalışmada iki temel sınıf kullanılmıştır:
+          </p>
+          <div class="dataset-badges">
+            <span class="badge">COVID</span>
+            <span class="badge">NORMAL</span>
+          </div>
+          <ul>
+            <li>Kaynak: COVID-19 Radiography Dataset</li>
+            <li>Görüntü tipi: Göğüs röntgeni</li>
+            <li>Renk yapısı: Grayscale</li>
+            <li>Sınıflandırma tipi: İkili sınıflandırma</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h3>Veri Seti İstatistikleri</h3>
+          <p>
+            Model eğitiminde kullanılan veri seti dağılımı aşağıda sunulmuştur.
+          </p>
+
+          <div class="dataset-badges">
+            <span class="badge">COVID: 3616</span>
+            <span class="badge">NORMAL: 10192</span>
+          </div>
+
+          <div class="table-like" style="margin-top:14px;">
+            <div class="row">
+              <strong>Eğitim Verisi</strong>
+              <span>COVID: 2277 &nbsp; | &nbsp; NORMAL: 6420</span>
+            </div>
+            <div class="row">
+              <strong>Doğrulama Verisi</strong>
+              <span>COVID: 254 &nbsp; | &nbsp; NORMAL: 714</span>
+            </div>
+            <div class="row">
+              <strong>Test Verisi</strong>
+              <span>COVID: 1085 &nbsp; | &nbsp; NORMAL: 3058</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="info-card">
+          <h3>Veri Bölme Yapısı</h3>
+          <ul>
+            <li>%70 Eğitim verisi</li>
+            <li>Train içinden doğrulama ayrımı</li>
+            <li>Kalan kısım test verisi</li>
+            <li>Sınıf bazlı sıralı bölme uygulanmıştır</li>
+          </ul>
+          <p style="margin-top:12px;">
+            Bu yapı sayesinde model hem eğitim hem doğrulama hem de bağımsız test verisi üzerinde değerlendirilmiştir.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3>Örnek Görüntüler</h3>
+
+          <div style="display:flex; justify-content:center; gap:30px; margin-top:20px;">
+            
+            <div style="text-align:center;">
+              <img src="{{ url_for('static', filename='ornek_covid.png') }}"
+                  style="width:140px; height:140px; object-fit:cover; border-radius:12px;">
+              <div style="margin-top:8px; font-weight:700;">COVID Örneği</div>
             </div>
 
-            {% if result == "COVID" %}
-              <div class="prediction covid">🔴 Tahmin: COVID</div>
-            {% else %}
-              <div class="prediction normal">🟢 Tahmin: NORMAL</div>
-            {% endif %}
-          </div>
-        {% endif %}
-      </section>
+            <div style="text-align:center;">
+              <img src="{{ url_for('static', filename='ornek_normal.png') }}"
+                  style="width:140px; height:140px; object-fit:cover; border-radius:12px;">
+              <div style="margin-top:8px; font-weight:700;">NORMAL Örneği</div>
+            </div>
 
-      <section class="card">
-        <div class="performance-head">
-          <div>
-            <h2>Model Performansı</h2>
-            <p style="margin-top:8px;">
-              Eğitim sürecinde elde edilen temel performans grafikleri burada yer almaktadır.
-            </p>
-          </div>
-          <span class="mini-badge">Accuracy • Loss • ROC • Matrix</span>
-        </div>
-
-        <div class="graphs">
-          <div class="graph-box">
-            <div class="graph-title">Accuracy Grafiği</div>
-            <img src="{{ url_for('static', filename='accuracy.png') }}" alt="Accuracy Grafiği">
-          </div>
-
-          <div class="graph-box">
-            <div class="graph-title">Loss Grafiği</div>
-            <img src="{{ url_for('static', filename='loss.png') }}" alt="Loss Grafiği">
-          </div>
-
-          <div class="graph-box">
-            <div class="graph-title">Confusion Matrix</div>
-            <img src="{{ url_for('static', filename='confusion_matrix.png') }}" alt="Confusion Matrix">
-          </div>
-
-          <div class="graph-box">
-            <div class="graph-title">ROC Eğrisi</div>
-            <img src="{{ url_for('static', filename='roc_curve.png') }}" alt="ROC Curve">
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
 
-    <div class="footer-note">
+    <section class="section" id="onisleme">
+      <div class="section-title">Veri Ön İşleme</div>
+      <div class="section-sub">
+        Modelin daha stabil öğrenebilmesi için görüntüler belirli ön işleme adımlarından geçirilmiştir.
+      </div>
+
+      <div class="grid-3">
+        <div class="info-card">
+          <h3>Boyutlandırma</h3>
+          <p>
+            Tüm görüntüler model girişine uygun olacak şekilde <strong>64x64</strong> boyutuna yeniden ölçeklendirilmiştir.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3>Normalizasyon</h3>
+          <p>
+            Piksel değerleri 255’e bölünerek <strong>0-1</strong> aralığına getirilmiştir.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3>Gri Tonlama</h3>
+          <p>
+            Görüntüler tek kanallı grayscale yapıda işlenmiş ve modele bu formatta verilmiştir.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="model">
+      <div class="section-title">Model ve Eğitim Yapısı</div>
+      <div class="section-sub">
+        Projede Yapay Sinir Ağı (ANN) yapısı kullanılmıştır. Modelin mimarisi ve temel hiperparametreleri aşağıda özetlenmiştir.
+      </div>
+
+      <div class="table-like">
+        <div class="row">
+          <strong>Model Tipi</strong>
+          <span>Artificial Neural Network (ANN)</span>
+        </div>
+        <div class="row">
+          <strong>Model Mimarisi</strong>
+          <span>Input (64x64x1) → Flatten → Dense(256, ReLU) → Dropout(0.30) → Dense(64, ReLU) → Dropout(0.20) → Dense(1, Sigmoid)</span>
+        </div>
+        <div class="row">
+          <strong>Epoch</strong>
+          <span>50</span>
+        </div>
+        <div class="row">
+          <strong>Batch Size</strong>
+          <span>64</span>
+        </div>
+        <div class="row">
+          <strong>Optimizer</strong>
+          <span>Adam</span>
+        </div>
+        <div class="row">
+          <strong>Learning Rate</strong>
+          <span>0.0001</span>
+        </div>
+        <div class="row">
+          <strong>Loss Function</strong>
+          <span>Binary Crossentropy</span>
+        </div>
+        <div class="row">
+          <strong>Ek Eğitim Detayları</strong>
+          <span>Class weight kullanılmış, ReduceLROnPlateau callback ile öğrenme oranı dinamik biçimde ayarlanmıştır.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sonuclar">
+      <div class="section-title">Sonuçlar ve Performans Grafikleri</div>
+      <div class="section-sub">
+        Model performansı accuracy, loss, ROC eğrisi ve confusion matrix ile değerlendirilmiştir.
+      </div>
+
+      <div class="performance-grid">
+        <div class="graph-box">
+          <h4>Accuracy Grafiği</h4>
+          <img src="{{ url_for('static', filename='accuracy.png') }}" alt="Accuracy Grafiği">
+        </div>
+
+        <div class="graph-box">
+          <h4>Loss Grafiği</h4>
+          <img src="{{ url_for('static', filename='loss.png') }}" alt="Loss Grafiği">
+        </div>
+
+        <div class="graph-box">
+          <h4>Confusion Matrix</h4>
+          <img src="{{ url_for('static', filename='confusion_matrix.png') }}" alt="Confusion Matrix">
+        </div>
+
+        <div class="graph-box">
+          <h4>ROC Eğrisi</h4>
+          <img src="{{ url_for('static', filename='roc_curve.png') }}" alt="ROC Eğrisi">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kaynakca">
+      <div class="section-title">Kaynakça</div>
+      <div class="section-sub">
+        Projede kullanılan temel veri ve yazılım kaynakları aşağıda verilmiştir.
+      </div>
+
+      <div class="table-like">
+        <div class="row">
+          <strong>Veri Seti</strong>
+          <span>COVID-19 Radiography Dataset (Kaggle)</span>
+        </div>
+        <div class="row">
+          <strong>Kütüphaneler</strong>
+          <span>TensorFlow / Keras, NumPy, Pillow, Flask, Matplotlib, scikit-learn</span>
+        </div>
+        <div class="row">
+          <strong>Uygulama Yapısı</strong>
+          <span>Flask tabanlı web arayüzü + eğitilmiş ANN modeli</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
       COVID X-Ray Detection - Yiğithan Özdemir
     </div>
   </div>

@@ -7,8 +7,20 @@ import tensorflow as tf
 IMG_SIZE = (64, 64)
 THRESHOLD = 0.5
 
-model = tf.keras.models.load_model("covid_ann_model.keras")
+def build_model():
+    model = tf.keras.Sequential([
+        tf.keras.layers.Input(shape=(64,64,1)),
+        tf.keras.layers.Flatten(),
+        tf.keras.layers.Dense(256, activation='relu'),
+        tf.keras.layers.Dropout(0.3),
+        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dropout(0.2),
+        tf.keras.layers.Dense(1, activation='sigmoid')
+    ])
+    return model
 
+model = build_model()
+model.load_weights("covid_ann_model.keras")
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
