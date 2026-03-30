@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 import random
 from pathlib import Path
@@ -11,9 +9,6 @@ from sklearn.metrics import classification_report, confusion_matrix, roc_auc_sco
 from tensorflow import keras
 from tensorflow.keras import layers
 
-# =========================================================
-# 1) AYARLAR
-# =========================================================
 import kagglehub
 DATASET_DIR = Path(kagglehub.dataset_download("tawsifurrahman/covid19-radiography-database")) / "COVID-19_Radiography_Dataset"
 
@@ -33,9 +28,6 @@ random.seed(SEED)
 np.random.seed(SEED)
 tf.random.set_seed(SEED)
 
-# =========================================================
-# 2) YARDIMCI FONKSİYONLAR
-# =========================================================
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".bmp", ".webp"}
 
 def get_sorted_images(folder: Path):
@@ -109,9 +101,6 @@ def show_probability_summary(y_prob):
     print(f"Medyan     : {np.median(y_prob):.6f}")
     print()
 
-# =========================================================
-# 3) DOSYALARI OKU
-# =========================================================
 print("=" * 70)
 print("DOSYALAR OKUNUYOR")
 print("=" * 70)
@@ -123,9 +112,6 @@ print(f"COVID toplam görüntü : {len(covid_files)}")
 print(f"NORMAL toplam görüntü: {len(normal_files)}")
 print()
 
-# =========================================================
-# 4) SINIF BAZLI SIRALI %70 TRAIN / %30 TEST
-# =========================================================
 covid_train_all, covid_test = split_sequential(covid_files, train_ratio=0.70)
 normal_train_all, normal_test = split_sequential(normal_files, train_ratio=0.70)
 
@@ -146,9 +132,6 @@ print()
 print_last_file_examples(covid_test, "COVID test son dosyalar:")
 print_last_file_examples(normal_test, "NORMAL test son dosyalar:")
 
-# =========================================================
-# 5) X/Y OLUŞTUR
-# =========================================================
 print("=" * 70)
 print("GÖRSELLER YÜKLENİYOR")
 print("=" * 70)
@@ -195,9 +178,6 @@ print(f"Val   NORMAL: {(y_val == 0).sum()} | COVID: {(y_val == 1).sum()}")
 print(f"Test  NORMAL: {(y_test == 0).sum()} | COVID: {(y_test == 1).sum()}")
 print()
 
-# =========================================================
-# 6) DATASET
-# =========================================================
 train_ds = tf.data.Dataset.from_tensor_slices((X_train, y_train)).shuffle(
     buffer_size=len(X_train), seed=SEED
 ).batch(BATCH_SIZE).prefetch(tf.data.AUTOTUNE)
@@ -210,9 +190,6 @@ test_ds = tf.data.Dataset.from_tensor_slices((X_test, y_test)).batch(
     BATCH_SIZE
 ).prefetch(tf.data.AUTOTUNE)
 
-# =========================================================
-# 7) CLASS WEIGHT
-# =========================================================
 normal_count = int((y_train == 0).sum())
 covid_count = int((y_train == 1).sum())
 total_train = len(y_train)
@@ -228,9 +205,7 @@ print("=" * 70)
 print(class_weight)
 print()
 
-# =========================================================
-# 8) ANN MODELİ
-# =========================================================
+
 print("=" * 70)
 print("MODEL")
 print("=" * 70)
@@ -258,9 +233,6 @@ model.compile(
 model.summary()
 print()
 
-# =========================================================
-# 9) EĞİTİM
-# =========================================================
 print("=" * 70)
 print("EĞİTİM BAŞLIYOR")
 print("=" * 70)
@@ -283,16 +255,12 @@ history = model.fit(
     verbose=1
 )
 
-# =========================================================
-# 10) MODELİ KAYDET
-# =========================================================
 MODEL_SAVE_PATH = "covid_ann_model.keras"
 
 model.save(MODEL_SAVE_PATH)
 print(f"\n✅ Model kaydedildi: {MODEL_SAVE_PATH}")
-# =========================================================
-# 11) GRAFİKLER
-# =========================================================
+
+
 plt.figure(figsize=(7, 4))
 plt.plot(history.history["accuracy"], label="train_accuracy")
 plt.plot(history.history["val_accuracy"], label="val_accuracy")
@@ -315,9 +283,7 @@ plt.tight_layout()
 plt.savefig(STATIC_DIR / "loss.png", dpi=150)
 plt.close()
 
-# =========================================================
-# 12) TEST SONUÇLARI
-# =========================================================
+
 print()
 print("=" * 70)
 print("TEST SONUÇLARI")
@@ -372,8 +338,5 @@ plt.tight_layout()
 plt.savefig(STATIC_DIR / "roc_curve.png", dpi=150)
 plt.close()
 
-# =========================================================
-# 13) ÖRNEK TAHMİNLER
-# =========================================================
 print()
 print_sample_predictions(model, X_test, y_test, test_file_paths, n=6, threshold=0.5)
