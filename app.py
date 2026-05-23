@@ -48,6 +48,9 @@ def index():
             except Exception as e:
                 error = f"Görüntü işlenirken hata oluştu: {e}"
 
+    return render_template("index.html", result=result, probability=probability,
+                           filename=filename, error=error)
+
 @app.route("/predict", methods=["POST"])
 def predict_api():
     file = request.files.get("image")
@@ -73,8 +76,6 @@ def predict_api():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    return render_template("index.html", result=result, probability=probability,
-                           filename=filename, error=error)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
